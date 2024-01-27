@@ -62,7 +62,7 @@ func jump():
 	anim_state_machine.travel("Jump");
 	velocity = direction * speed;
 	
-	move_and_slide()
+	move_and_slide();
 
 
 func dead():
@@ -71,6 +71,7 @@ func dead():
 
 func _on_state_reset():
 	current_state = player_state.MOVE;
+	player_collision.disabled = false;
 
 
 func _clear_player_collision():
