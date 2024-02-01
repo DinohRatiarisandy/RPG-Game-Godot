@@ -1,5 +1,3 @@
-class_name Player;
-
 extends CharacterBody2D
 
 enum player_state {MOVE, SWORD_ATTACK, JUMP, DEAD};
@@ -10,6 +8,7 @@ enum player_state {MOVE, SWORD_ATTACK, JUMP, DEAD};
 @onready var animation_tree = $AnimationTree;
 @onready var anim_state_machine = animation_tree.get("parameters/playback");
 @onready var player_collision = $PlayerCollision;
+@onready var camera_2d = $"../Camera2D"
 
 var direction := Vector2.ZERO;
 var current_state := player_state.MOVE;
@@ -29,6 +28,10 @@ func _physics_process(_delta):
 		player_state.DEAD:
 			dead();
 
+
+func _process(_delta):
+	position.x = clamp(position.x, 14, camera_2d.limit_right - 11);
+	position.y = clamp(position.y, 19, camera_2d.limit_bottom - 15);
 
 func move() -> void:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down");
@@ -50,7 +53,10 @@ func move() -> void:
 	
 	if Input.is_action_just_pressed("jump"):
 		current_state = player_state.JUMP;
-
+	
+	if PlayerData.health <= 0:
+		current_state = player_state.DEAD;
+	
 	move_and_slide()
 
 
@@ -66,7 +72,12 @@ func jump():
 
 
 func dead():
-	pass
+	anim_state_machine.travel("Dead");
+	player_collision.disabled = true;
+	await get_tree().create_timer(1).timeout;
+	PlayerData.health = 4;
+	PlayerData.coins_count = 0;
+	get_tree().reload_current_scene();
 
 
 func _on_state_reset():

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd4k0dx7kwapj"]
+
+[ext_resource type="Script" path="res://Scripts/gui.gd" id="1_qniyu"]
+[ext_resource type="Texture2D" uid="uid://34puxcdr8k8w" path="res://Sprites/HeartSpriteSheet.png" id="1_uia3o"]
+[ext_resource type="Texture2D" uid="uid://bxxbiimnbify0" path="res://Sprites/player_head.png" id="2_pfs44"]
+[ext_resource type="Texture2D" uid="uid://bbbckmjipblov" path="res://Sprites/coin.png" id="4_36uhj"]
+
+[node name="GUI" type="Node2D"]
+position = Vector2(2, 6)
+script = ExtResource("1_qniyu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hearts" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(66, 33)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_uia3o")
+hframes = 5
+frame = 4
+
+[node name="Head" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(33, 24)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_pfs44")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(31, 64)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_36uhj")
+hframes = 8
+
+[node name="CoinsCount" type="Label" parent="CanvasLayer"]
+offset_left = 56.0
+offset_top = 47.0
+offset_right = 122.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 24
+text = "0"
