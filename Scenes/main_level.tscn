@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhdc3s7rmvb86"]
+[gd_scene load_steps=11 format=3 uid="uid://bhdc3s7rmvb86"]
 
 [ext_resource type="PackedScene" uid="uid://bknvaqhhtfbjw" path="res://Scenes/player.tscn" id="1_m4v3n"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="3_08osn"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crcigw7cyd331" path="res://Scenes/coin.tscn" id="6_8sfno"]
 [ext_resource type="Script" path="res://Scripts/camera_panning.gd" id="6_v1bn1"]
 [ext_resource type="PackedScene" uid="uid://dd4k0dx7kwapj" path="res://Scenes/gui.tscn" id="7_2r1xu"]
+[ext_resource type="PackedScene" uid="uid://bvsma6lhspo3j" path="res://Scenes/enemies/enemy.tscn" id="8_y0hr3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2kwpa"]
 texture = ExtResource("4_6btfw")
@@ -248,3 +249,14 @@ position = Vector2(248, 159)
 
 [node name="GUI" parent="." instance=ExtResource("7_2r1xu")]
 z_index = 1
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Enemy_1" parent="Enemies" instance=ExtResource("8_y0hr3")]
+position = Vector2(162, 87)
+
+[node name="Enemy_2" parent="Enemies" instance=ExtResource("8_y0hr3")]
+position = Vector2(162, 44)
+
+[node name="Enemy_3" parent="Enemies" instance=ExtResource("8_y0hr3")]
+position = Vector2(283, 75)

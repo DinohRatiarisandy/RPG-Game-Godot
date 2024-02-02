@@ -6,8 +6,6 @@ func _on_body_entered(body):
 	if body.name == "Player":
 		PlayerData.coins_count += 1;
 
-		PlayerData.health -= 1;
-		
 		hit.emit();
 		
 		queue_free();

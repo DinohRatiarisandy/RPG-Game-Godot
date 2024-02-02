@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://tmqx65molq8m"]
+
+[ext_resource type="Texture2D" uid="uid://dtjpulsvuqhxb" path="res://Sprites/Player-rpg.png" id="1_cnidw"]
+
+[sub_resource type="Animation" id="Animation_qckvj"]
+resource_name = "Dead"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [100, 101, 102, 103, 104]
+}
+
+[sub_resource type="Animation" id="Animation_bd8gk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [101]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhfhm"]
+_data = {
+"Dead": SubResource("Animation_qckvj"),
+"RESET": SubResource("Animation_bd8gk")
+}
+
+[node name="DeadFX" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cnidw")
+hframes = 12
+vframes = 9
+frame = 101
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uhfhm")
+}
+autoplay = "Dead"

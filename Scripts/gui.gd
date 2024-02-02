@@ -5,8 +5,9 @@ extends Node2D
 @onready var coins = $"../Coins";
 
 func _ready():
+	#enemy_1.enemy_hit_player.connect(update_player_life);
 	for coin in coins.get_children():
-		coin.hit.connect(_on_gui_update);
+		link_hit_method(coin);
 	
 	for i in range(PlayerData.health):
 		var new_heart = Sprite2D.new();
@@ -19,9 +20,7 @@ func _ready():
 
 func _on_gui_update():
 	coins_count_label.text = str(PlayerData.coins_count);
-	
-	if hearts.get_children().size() == 1:
-		hearts.queue_free();
-		return;
-	
-	hearts.get_children()[-1].queue_free();
+
+
+func link_hit_method(coin):
+	coin.hit.connect(_on_gui_update);

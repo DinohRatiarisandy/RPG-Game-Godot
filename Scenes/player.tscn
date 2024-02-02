@@ -1,7 +1,8 @@
-[gd_scene load_steps=63 format=3 uid="uid://bknvaqhhtfbjw"]
+[gd_scene load_steps=65 format=3 uid="uid://bknvaqhhtfbjw"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_7loxy"]
 [ext_resource type="Texture2D" uid="uid://dtjpulsvuqhxb" path="res://Sprites/Player-rpg.png" id="2_vgifa"]
+[ext_resource type="Shader" path="res://Shaders/hurt.gdshader" id="2_w5wmu"]
 
 [sub_resource type="Animation" id="Animation_3x71i"]
 resource_name = "Dead"
@@ -619,6 +620,11 @@ _data = {
 "WalkUp": SubResource("Animation_v2kt1")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iyihv"]
+shader = ExtResource("2_w5wmu")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kog86"]
 size = Vector2(13, 6)
 
@@ -789,7 +795,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
-collision_mask = 18
+collision_mask = 2
 script = ExtResource("1_7loxy")
 
 [node name="PlayerAnimation" type="AnimationPlayer" parent="."]
@@ -798,6 +804,7 @@ libraries = {
 }
 
 [node name="PlayerImage" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_iyihv")
 position = Vector2(0, -1)
 texture = ExtResource("2_vgifa")
 hframes = 12
@@ -809,7 +816,7 @@ position = Vector2(-0.5, 12)
 shape = SubResource("RectangleShape2D_kog86")
 metadata/_edit_lock_ = true
 
-[node name="SwordAttackArea" type="Area2D" parent="."]
+[node name="SwordAttackArea" type="Area2D" parent="." groups=["sword"]]
 position = Vector2(21, -1)
 collision_layer = 8
 collision_mask = 20

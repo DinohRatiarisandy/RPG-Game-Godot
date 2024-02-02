@@ -30,8 +30,8 @@ func _physics_process(_delta):
 
 
 func _process(_delta):
-	position.x = clamp(position.x, 14, camera_2d.limit_right - 11);
-	position.y = clamp(position.y, 19, camera_2d.limit_bottom - 15);
+	position.x = clamp(position.x, 5, camera_2d.limit_right - 5);
+	position.y = clamp(position.y, 0, camera_2d.limit_bottom - 5);
 
 func move() -> void:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down");
@@ -78,6 +78,12 @@ func dead():
 	PlayerData.health = 4;
 	PlayerData.coins_count = 0;
 	get_tree().reload_current_scene();
+
+
+func flash_hurt():
+	$PlayerImage.material.set_shader_parameter("flash_modifier", 1);
+	await get_tree().create_timer(0.3).timeout;
+	$PlayerImage.material.set_shader_parameter("flash_modifier", 0);
 
 
 func _on_state_reset():
