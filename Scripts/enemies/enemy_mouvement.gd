@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var current_state_machine = enemy_state.MOVE_DOWN;
 var dir;
-var health := 4;
+var health := 3;
 
 enum enemy_state {MOVE_RIGHT, MOVE_LEFT, MOVE_UP, MOVE_DOWN, DEAD};
 
